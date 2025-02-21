@@ -14,16 +14,15 @@ if (!cached) {
 
 export async function dbConnect() {
     if (cached.conn) {
+        console.log('====================================');
+        console.log(cached);
+        console.log('====================================');
         return cached.conn;
     }
 
     if (!cached.promise) {
         const opts = {
-            bufferCommands: false,
-            bufferMaxEntries: 0,
-            useFindAndModify: false,
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
+            bufferCommands: true,
         };
 
         cached.promise = mongoose

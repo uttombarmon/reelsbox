@@ -5,7 +5,7 @@ export interface UserInterface {
     name : string;
     email : string;
     password : string;
-    _id? : mongoose.Schema.Types.ObjectId;
+    _id? : mongoose.Types.ObjectId;
     createDate? : Date;
     updateDate? : Date;
 }
