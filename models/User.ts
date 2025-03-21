@@ -2,12 +2,12 @@ import bcrypt from 'bcryptjs';
 import mongoose, { Schema, model, models } from 'mongoose';
 
 export interface UserInterface {
-    name : string;
-    email : string;
-    password : string;
-    _id? : mongoose.Types.ObjectId;
-    createDate? : Date;
-    updateDate? : Date;
+    name?: string;
+    email: string;
+    password: string;
+    _id?: mongoose.Types.ObjectId;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 const UserSchema = new Schema<UserInterface>({
@@ -25,16 +25,11 @@ const UserSchema = new Schema<UserInterface>({
     password: {
         type: String,
         required: true,
-    },
-    createDate: {
-        type: Date,
-        default: Date.now,
-    },
-    updateDate: {
-        type: Date,
-        default: Date.now,
-    },
-});
+    }
+}, {
+    timestamps: true
+}
+);
 
 UserSchema.pre('save', async function (next) {
     if (this.isModified('password')) {

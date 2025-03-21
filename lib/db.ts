@@ -14,9 +14,9 @@ if (!cached) {
 
 export async function dbConnect() {
     if (cached.conn) {
-        console.log('====================================');
-        console.log(cached);
-        console.log('====================================');
+        // console.log('====================================');
+        // console.log(cached);
+        // console.log('====================================');
         return cached.conn;
     }
 

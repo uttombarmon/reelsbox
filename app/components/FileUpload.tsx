@@ -70,6 +70,7 @@ export default function FileUpload({
           useUniqueFileName={true}
           validateFile={validateFile}
           folder={fileType === "video"? "/reelsbox/videos": "/reelsbox/images"}
+          className=" file-input file-input-bordered w-full"
           onError={onError}
           onSuccess={handleSuccess}
           onUploadProgress={handleUploadProgress}

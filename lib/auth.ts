@@ -13,6 +13,7 @@ export const authOptions: NextAuthOptions = {
                 password: { label: "password", type: "password" }
             },
             async authorize(credentials) {
+                console.log(credentials);
                 if (!credentials) {
                     throw new Error("Missing email or password.");
                 }
@@ -20,6 +21,7 @@ export const authOptions: NextAuthOptions = {
                 try {
                     await dbConnect()
                     const user = await User.findOne({ email: credentials.email });
+                    console.log(user);
                     if (!user) {
                         throw new Error("Please register first!")
                     }
@@ -56,7 +58,7 @@ export const authOptions: NextAuthOptions = {
     },
     pages:{
         signIn: "/login",
-        error: "login"
+        error: "/login"
     },
     session: {
         strategy: "jwt",
