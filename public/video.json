@@ -1,0 +1,43 @@
+[
+    {
+      "title": "Introduction to Next.js",
+      "description": "A beginner-friendly tutorial on how to get started with Next.js.",
+      "url": "https://ik.imagekit.io/dz9bthsjg/videos/Next.js%20in%2060%20Seconds!.mp4?updatedAt=1742572838837",
+      "thumbnail": "https://example.com/thumbnails/nextjs-intro.jpg",
+      "control": true,
+      "transformation": {
+        "height": 720,
+        "width": 1280,
+        "quality": 80
+      },
+      "createdAt": "2025-03-10T12:00:00.000Z",
+      "updatedAt": "2025-03-15T08:30:00.000Z"
+    },
+    {
+      "title": "Mastering React Hooks",
+      "description": "Deep dive into React Hooks and their real-world applications.",
+      "url": "https://ik.imagekit.io/dz9bthsjg/videos/Mastering%20UseEffect%20Hook%20in%201%20Minute%20_reactjs%20_reactnative%20_shorts.mp4?updatedAt=1742572832039",
+      "thumbnail": "https://example.com/thumbnails/react-hooks.jpg",
+      "control": false,
+      "transformation": {
+        "height": 1080,
+        "width": 1920
+      },
+      "createdAt": "2025-02-20T14:45:00.000Z",
+      "updatedAt": "2025-03-18T09:15:00.000Z"
+    },
+    {
+      "title": "Understanding TypeScript",
+      "description": "Learn the fundamentals of TypeScript and how it enhances JavaScript development.",
+      "url": "https://ik.imagekit.io/dz9bthsjg/videos/Understand%20TypeScript%20Under%2060%20Seconds%20_%20by%20Ali%20Hayder%20_Shorts.mp4?updatedAt=1742572808452",
+      "thumbnail": "https://example.com/thumbnails/typescript-basics.jpg",
+      "transformation": {
+        "height": 720,
+        "width": 1280,
+        "quality": 90
+      },
+      "createdAt": "2025-01-15T10:00:00.000Z",
+      "updatedAt": "2025-03-19T07:00:00.000Z"
+    }
+  ]
+  

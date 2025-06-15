@@ -10,9 +10,9 @@ function Navbar() {
     const { data: session } = useSession();
     console.log(session);
     return (
-        <div className="navbar bg-opacity-30 bg-indigo-100 backdrop-blur-lg shadow-sm fixed">
+        <div className="navbar bg-opacity-20 bg-indigo-100 backdrop-blur-lg shadow-sm fixed">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl">ReelsBox</a>
+                <a className="btn text-xl btn-ghost">ReelsBox</a>
             </div>
             <div className="flex-none">
                 <div className="dropdown dropdown-end">
