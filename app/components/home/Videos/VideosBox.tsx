@@ -19,7 +19,7 @@ function VideosBox() {
     fetchVideos();
   }, []);
   return (
-    <div className=" w-2/4 mx-center">
+    <div className=" w-full md:w-3/5 mx-center overflow-x-hidden">
       {videos && videos.length > 0 ? (
         <div className="carousel carousel-vertical rounded-box h-[95vh] w-full">
           {videos.map((e, idx) => (
@@ -27,7 +27,7 @@ function VideosBox() {
           ))}
         </div>
       ) : (
-        <p>Data load failed!</p>
+        <span className="loading loading-ring loading-xl"></span>
       )}
     </div>
   );
