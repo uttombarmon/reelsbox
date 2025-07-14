@@ -1,33 +1,73 @@
 "use client";
 import { VideoInterface } from "@/models/Video";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Buttons } from "./Buttons/Buttons";
 
 function Video({ VData }: { VData: VideoInterface }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const container = containerRef.current;
+    // const video = videoRef.current;
+    if (!container) return;
 
-    const observer = new IntersectionObserver(
+    const loadObserver = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.play().catch(() => {});
+          // video.play().catch(() => {});
+          setShouldLoadVideo(true);
+          loadObserver.unobserve(container);
+        }
+        // else {
+        //   video.pause();
+        // }
+      },
+      {
+        rootMargin: "200px 0px",
+        threshold: 0.6, // video must be ~60% visible to play
+      }
+    );
+
+    loadObserver.observe(container);
+    return () => {
+      if (container) {
+        loadObserver.unobserve(container);
+      }
+    };
+  }, []);
+  useEffect(() => {
+    if (!shouldLoadVideo) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+    const playPauseObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch((e) => console.log(e));
         } else {
           video.pause();
         }
       },
       {
-        threshold: 0.6, // video must be ~60% visible to play
+        threshold: 0.6,
       }
     );
+    playPauseObserver.observe(video);
 
-    observer.observe(video);
-    return () => observer.unobserve(video);
-  }, []);
+    return () => {
+      if (video) {
+        playPauseObserver.unobserve(video);
+      }
+    };
+  }, [shouldLoadVideo]);
+
   return (
-    <div className="carousel-item h-full mx-auto flex justify-center w-full">
+    <div
+      className="carousel-item h-full mx-auto flex justify-center w-full"
+      ref={containerRef}
+    >
       <div className=" w-fit relative lg:px-20">
         <video
           className="h-full relative rounded-xl object-cover aspect-[9/16]"

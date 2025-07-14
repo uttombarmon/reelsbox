@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const Sidebar = () => {
   return (
-    <ul className="menu bg-base-200 rounded-box w-full min-h-full text-xl">
+    <ul className="menu bg-base-200 rounded-box w-full  min-h-full text-xl">
       <li className=" text-4xl font-bold mb-4">
         <a href="">ReelsBox</a>
       </li>
