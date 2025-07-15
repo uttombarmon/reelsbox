@@ -17,6 +17,7 @@ function VideosBox() {
   // Initialize hasMore to true, assuming there's data to fetch initially
   const [hasMore, setHasMore] = useState(true);
   const [isGloballyMuted, setIsGloballyMuted] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   // Ref for the element at the bottom of the scroll area for IntersectionObserver
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,10 @@ function VideosBox() {
       console.log(
         "Preventing fetch: already loading, no more data, or error present."
       );
+      setTimeout(() => {
+        setLoading(false);
+        setShowMessage(true);
+      }, 3000);
       return;
     }
 
@@ -38,8 +43,8 @@ function VideosBox() {
     try {
       // Call your API client, passing the current skip and defined limit.
       // Make sure apiClient.GetVideos accepts these parameters.
-      const data = await apiClient.GetVideos();
-
+      const data = await apiClient.GetVideos(skip);
+      console.log(data);
       // Validate the response structure
       if (
         data &&
@@ -68,7 +73,7 @@ function VideosBox() {
     } finally {
       setLoading(false); // Always set loading to false after fetch attempt (success or failure)
     }
-  }, [loading, hasMore, error]); // Dependencies for useCallback: re-create if these change
+  }, [loading, hasMore, error, skip]); // Dependencies for useCallback: re-create if these change
 
   // useEffect to trigger the initial fetch and subsequent fetches when 'skip' changes.
   // This effect will run when the component mounts and whenever 'skip' is updated
@@ -173,7 +178,7 @@ function VideosBox() {
       )}
 
       {/* IntersectionObserver target element: only render if there might be more to load */}
-      {hasMore && !loading && (
+      {showMessage && (
         <div ref={bottomRef} className="h-1 bg-transparent"></div>
       )}
     </div>

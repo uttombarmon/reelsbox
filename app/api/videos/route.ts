@@ -95,13 +95,13 @@ export async function POST(request: NextRequest) {
     const videoData = {
       ...body,
       userId: session.user.id, // Assign the authenticated user's ID
-      control: body.control ?? true, // Default 'control' to true if not provided
+      control: true, // Default 'control' to true if not provided
       transformation: {
-        height: body.transformation?.height ?? 1920, // Default height
-        width: body.transformation?.width ?? 1080, // Default width
-        quality: body.transformation?.quality ?? 100, // Default quality
+        height: body.transformation?.height ?? 1920,
+        width: body.transformation?.width ?? 1080,
+        quality: body.transformation?.quality ?? 100,
       },
-      createdAt: new Date(), // Explicitly set creation date
+      createdAt: new Date(),
     };
 
     // Create a new video document in the database

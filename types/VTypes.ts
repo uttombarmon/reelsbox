@@ -1,17 +1,24 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
-export interface VideoInterface {
+export interface VideoInterface extends Document {
+  _id: mongoose.Types.ObjectId;
   title: string;
-  description: string;
+  description?: string;
   url: string;
   thumbnail: string;
-  control?: boolean;
+  userId: mongoose.Types.ObjectId;
+  category?: "showcase" | "tutorial" | "promo" | "personal" | "other";
+  tags?: string[];
+  duration?: number;
+  views: number;
+  likes: mongoose.Types.ObjectId[];
+  commentsCount: number;
   transformation?: {
-    height: number;
-    width: number;
+    width?: number;
+    height?: number;
     quality?: number;
   };
-  _id?: mongoose.Schema.Types.ObjectId;
-  createdAt?: Date;
-  updatedAt?: Date;
+  isPrivate: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }

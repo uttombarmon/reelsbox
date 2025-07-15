@@ -11,7 +11,7 @@ type VideoFormData = Omit<VideoInterface, "_id">;
 class ApiClient {
   private async myFetch<T>(
     endpoint: string,
-    limit?: string | null,
+    limit?: string | number | null,
     options: fetchOptions = {}
   ): Promise<T> {
     const { method = "GET", body, headers = {} } = options;
@@ -41,8 +41,8 @@ class ApiClient {
     }
     return response.json();
   }
-  async GetVideos() {
-    return this.myFetch<GetVideosInterface>("/videos", "limit=5");
+  async GetVideos(limit: number) {
+    return this.myFetch<GetVideosInterface>("/videos", limit);
   }
   async GetAVideo(id: string) {
     return this.myFetch<VideoInterface>(`/videos/${id}`);
