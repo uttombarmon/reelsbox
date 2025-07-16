@@ -1,3 +1,4 @@
+"use client";
 import {
   CirclePlus,
   Compass,
@@ -6,9 +7,11 @@ import {
   UserRoundCog,
   Users,
 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Sidebar = () => {
+  const { data: session } = useSession();
   return (
     <ul className="menu bg-base-200 rounded-box w-full  min-h-full text-xl">
       <li className=" text-4xl font-bold mb-4">
@@ -71,11 +74,19 @@ const Sidebar = () => {
           Settings
         </a>
       </li>
-      <li className=" my-2">
-        <Link className=" btn btn-accent text-xl" href={"/login"}>
-          Log in
-        </Link>
-      </li>
+      {!session ? (
+        <li className=" my-2">
+          <Link className=" btn btn-accent text-xl" href={"/login"}>
+            Log in
+          </Link>
+        </li>
+      ) : (
+        <li className=" my-2">
+          <Link className=" btn btn-info text-xl" href={"/profile"}>
+            {session.user.name}
+          </Link>
+        </li>
+      )}
     </ul>
   );
 };
