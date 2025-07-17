@@ -1,64 +1,73 @@
 // middleware.ts
 import { withAuth } from "next-auth/middleware";
-import type { NextRequest } from "next/server"; // Import NextRequest for type hinting
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export default withAuth(
-  // This function runs before the request is processed by the page/route handler.
-  // It has access to the request and the session token (if available).
   async function middleware(req: NextRequest) {
-    // Access the session token directly from req.nextauth.token,
-    // which is provided by withAuth.
     const token = req.nextauth.token;
     const { pathname } = req.nextUrl;
 
+    // --- DEBUGGING LOGS ---
+    console.log(`[Middleware] Path: ${pathname}`);
+    console.log(`[Middleware] Token exists: ${!!token}`);
+    // --- END DEBUGGING LOGS ---
+
     // 1. Redirect authenticated users away from login/register pages
-    // If a token exists (user is logged in) AND they are trying to access /login or /register,
-    // then redirect them to the dashboard or homepage.
     if (token && (pathname === "/login" || pathname === "/register")) {
-      // Create a new URL for the redirect. Assuming '/dashboard' is your logged-in landing page.
-      // You can change '/dashboard' to '/' or any other appropriate page.
-      return NextResponse.redirect(new URL("/dashboard", req.url));
+      console.log(
+        `[Middleware] Authenticated user trying to access ${pathname}. Redirecting to /.`
+      );
+      return NextResponse.redirect(new URL("/", req.url));
     }
 
     // 2. Otherwise, let the 'authorized' callback handle the rest of the authorization logic.
-    // This return statement allows the request to continue to the 'authorized' callback below.
     return NextResponse.next();
   },
   {
-    // The 'callbacks' object defines authorization rules.
     callbacks: {
       authorized: ({ token, req }) => {
         const { pathname } = req.nextUrl;
 
+        // --- DEBUGGING LOGS ---
+        console.log(`[Authorized Callback] Path: ${pathname}`);
+        console.log(`[Authorized Callback] Token exists: ${!!token}`);
+        // --- END DEBUGGING LOGS ---
+
         // Allow access to specific public paths for ALL users (authenticated or not).
-        // This includes NextAuth API routes, the homepage, and the public video API.
         if (
-          pathname.startsWith("/api/auth") || // NextAuth's internal API routes
-          pathname === "/" || // Your public homepage
-          pathname === "/login" || // Login page (already handled above for logged-in users)
-          pathname === "/register" || // Register page (already handled above for logged-in users)
-          pathname.startsWith("/api/videos") // Your public video fetching API
+          pathname.startsWith("/api/auth") ||
+          pathname === "/" ||
+          pathname === "/login" ||
+          pathname === "/register" ||
+          pathname.startsWith("/api/videos")
         ) {
-          return true; // Always allow these paths
+          console.log(
+            `[Authorized Callback] Allowing public access to: ${pathname}`
+          );
+          return true;
         }
 
-        // For all other paths, require the user to be authenticated (have a token).
-        // If 'token' is null/undefined, this will return false, triggering a redirect to signIn page.
+        // For all other paths, require the user to be authenticated.
+        console.log(
+          `[Authorized Callback] Requiring authentication for: ${pathname}. Token: ${!!token}`
+        );
         return !!token;
       },
     },
-    // The 'pages' option configures where NextAuth redirects users for specific actions.
     pages: {
-      signIn: "/login", // Redirect unauthenticated users to this path for sign-in
-      // error: '/auth/error', // Optional: Custom error page
-      // newUser: '/auth/new-user', // Optional: Page for new users after first sign-in
+      signIn: "/login",
     },
   }
 );
 
-// The 'config' object specifies which paths the middleware should apply to.
-// This matcher regex ensures the middleware runs for all paths except static files.
+// --- CRITICAL CHANGE FOR DEBUGGING ---
+// Temporarily simplify the matcher to ensure it includes '/login'
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|public/).*)"],
+  // This matcher will run the middleware for ALL paths.
+  // This is for debugging purposes to confirm if the matcher was the issue.
+  matcher: ["/:path*"],
+  // Once confirmed, you can revert to a more specific matcher if needed,
+  // or use the original one if the issue was elsewhere.
 };
+// --- END CRITICAL CHANGE ---

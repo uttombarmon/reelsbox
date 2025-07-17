@@ -166,13 +166,19 @@ function Video({ VData, isMuted, onToggleMute }: VideoProps) {
             {/* Uploader Information and Follow Button */}
             {/* {isUserPopulated(VData.userId) && ( */}
             <div className="flex items-center gap-2">
-              <Image
-                src={"https://placehold.co/32x32/E0E0E0/333333?text=P"} // Fallback if profileImageSrc is undefined
-                alt={"Uploader"}
-                className="rounded-full object-cover border border-gray-300"
-                width={32}
-                height={32}
-              />
+              {VData.userId ? (
+                <Image
+                  src={"https://placehold.co/32x32/E0E0E0/333333?text=PP"} // Fallback if profileImageSrc is undefined
+                  alt={"Uploader"}
+                  className="rounded-full object-cover border border-gray-300"
+                  width={32}
+                  height={32}
+                />
+              ) : (
+                <div className=" rounded-full w-8 h-8 flex justify-center items-center bg-black/10">
+                  <span className="text-white text-lg font-bold">P</span>
+                </div>
+              )}
               <span className="font-semibold text-base">@username</span>
               {/* Follow Button - Placeholder for functionality */}
               <button className="ml-2 px-3 py-1 bg-red-500 text-white font-semibold text-sm rounded-full shadow-md hover:bg-red-600 transition-colors duration-200">

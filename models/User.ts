@@ -17,7 +17,6 @@ const UserSchema = new Schema<UserInterface>(
     },
     password: {
       type: String,
-      required: true,
     },
   },
   {
@@ -26,7 +25,7 @@ const UserSchema = new Schema<UserInterface>(
 );
 
 UserSchema.pre("save", async function (next) {
-  if (this.isModified("password")) {
+  if (this.password && this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
   }
   next();

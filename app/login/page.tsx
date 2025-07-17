@@ -1,116 +1,35 @@
-"use client";
-import { UserInterface } from "@/types/UTypes";
-import { Eye, EyeOff } from "lucide-react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-function LogIn() {
-  const router = useRouter();
-  const [userData, setUserData] = useState<UserInterface>({
-    email: "",
-    password: "",
-  });
-  const [view, setView] = useState(false);
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const data = e.target.value;
-    setUserData({
-      ...userData,
-      email: data,
-    });
-  };
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const data = e.target.value;
-    setUserData({
-      ...userData,
-      password: data,
-    });
-  };
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const result = await signIn("credentials", {
-      ...userData,
-      redirect: false,
-    });
-    if (result?.error) {
-      console.error("Login error:", result.error);
-    } else {
-      router.push("/");
-    }
-  };
-  return (
-    <div className="hero bg-base-200 min-h-screen mx-auto">
-      <div className="hero-content flex-col lg:flex-row-reverse lg:w-3/4 mx-auto">
-        <div className="text-center">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-        </div>
-        <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <div className="card-body">
-            <form className="fieldset" onSubmit={handleLogin}>
-              <label className="input validator join-item">
-                <svg
-                  className="h-[1em] opacity-50"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2.5"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                  </g>
-                </svg>
-                <input
-                  type="email"
-                  placeholder="mail@site.com"
-                  required
-                  onChange={handleEmail}
-                />
-              </label>
-              <div className="validator-hint hidden">
-                Enter valid email address
-              </div>
-              <label className="input validator">
-                <input
-                  type={view ? "text" : "password"}
-                  required
-                  placeholder="Password"
-                  minLength={8}
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                  title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
-                  onChange={handlePassword}
-                />
-                <span className=" right-0" onClick={() => setView(!view)}>
-                  {view ? <Eye /> : <EyeOff />}
-                </span>
-              </label>
-              <p className="validator-hint hidden">
-                Must be more than 8 characters, including
-                <br />
-                At least one number
-                <br />
-                At least one lowercase letter
-                <br />
-                At least one uppercase letter
-              </p>
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import Image from "next/image";
+import { redirect } from "next/navigation";
+import Form from "../components/login/Form";
+async function LogIn() {
+  const session = await getServerSession(authOptions);
+  if (session) {
+    redirect("/");
+  }
 
-              <div>
-                <a className="link link-hover">Forgot password?</a>
-              </div>
-              <button className="btn btn-neutral mt-4" type="submit">
-                Login
-              </button>
-            </form>
-          </div>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-500/10 to-purple-600/10 p-4">
+      <div className="p-8 rounded-2xl shadow-2xl w-full flex justify-center flex-wrap">
+        {/* <h1 className="text-4xl font-extrabold text-gray-900 mb-3">
+            Welcome Back!
+          </h1>
+          <p className="text-lg text-gray-600">
+            Sign in to dive back into your personalized Reels Box experience.
+          </p> */}
+        <div className=" hidden relative w-full lg:w-1/2 h-64 lg:h-auto lg:min-h-[500px] lg:flex items-center justify-center p-4">
+          <Image
+            src="https://i.postimg.cc/6qc9kvt0/instagram-web-lox-image.png"
+            alt="Reels Box Visual"
+            fill // This makes the image fill its parent div
+            style={{ objectFit: "contain" }} // or 'cover', depending on how you want it to fit
+            sizes="(max-width: 1024px) 100vw, 50vw" // Optimize image loading for different screen sizes
+            className="rounded-lg shadow-xl" // Add some styling
+          />
         </div>
+
+        <Form />
       </div>
     </div>
   );

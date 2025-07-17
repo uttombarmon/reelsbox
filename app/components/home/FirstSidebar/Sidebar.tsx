@@ -7,11 +7,12 @@ import {
   UserRoundCog,
   Users,
 } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Sidebar = () => {
   const { data: session } = useSession();
+  console.log(session);
   return (
     <ul className="menu bg-base-200 rounded-box w-full  min-h-full text-xl">
       <li className=" text-4xl font-bold mb-4">
@@ -82,9 +83,9 @@ const Sidebar = () => {
         </li>
       ) : (
         <li className=" my-2">
-          <Link className=" btn btn-info text-xl" href={"/profile"}>
-            {session.user.name}
-          </Link>
+          <button className=" btn btn-info text-xl" onClick={() => signOut()}>
+            Sign Out
+          </button>
         </li>
       )}
     </ul>
