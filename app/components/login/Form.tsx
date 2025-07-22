@@ -44,7 +44,7 @@ function Form() {
     <div className=" max-w-md lg:w-1/3 flex flex-wrap h-full justify-center items-center">
       <div className=" h-fit w-fit space-y-6 flex flex-wrap justify-center items-center">
         <div className="text-4xl font-bold mb-4">
-          <p>REELSBOX</p>
+          <Link href={"/"}>REELSBOX</Link>
         </div>
         <form
           className=" space-y-6 self-center w-3/4 h-fit"
@@ -101,7 +101,7 @@ function Form() {
 
           <div className=" w-full flex justify-center text-center">
             <button
-              className="flex justify-center items-center w-full px-10 py-2 bg-blue-700 rounded-lg shadow-sm font-medium hover:bg-blue-800 transition-colors duration-200"
+              className="flex justify-center items-center w-full px-10 py-2 bg-blue-700 rounded-lg shadow-xs font-medium hover:bg-blue-800 transition-colors duration-200"
               type="submit"
             >
               <p>Login</p>
@@ -110,25 +110,27 @@ function Form() {
         </form>
         {/* forget password */}
         <div className=" w-full flex justify-center">
-          <a className="link link-hover text-gray-300">Forgot password?</a>
+          <a className="link link-hover dark:text-gray-300 text-gray-500">
+            Forgot password?
+          </a>
         </div>
         {/* register option */}
         <div className=" w-full flex justify-center">
-          <p className=" text-gray-300">
+          <p className=" dark:text-gray-300 text-gray-500">
             Don&apos;t have account?{" "}
             <Link href={"/register"} className=" text-blue-700 underline">
               regsiter now
             </Link>
           </p>
         </div>
-        {/* Optional: Social Login Buttons */}
+        {/* Social Login Buttons */}
         <div className="mt-6 text-center h-fit self-center">
           <p className="text-gray-500 mb-3">Or sign in with:</p>
           <div className="flex justify-center gap-4">
-            {/* Example Google Login Button */}
+            {/* Google Login Button */}
             <button
-              onClick={() => signIn("google")} // Call signIn with provider ID
-              className="flex items-center px-5 py-2 border border-gray-300 rounded-lg shadow-sm text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
+              onClick={() => signIn("google")}
+              className="flex items-center px-5 py-2 border border-gray-300 rounded-lg shadow-xs text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
               // disabled={loading}
             >
               <Image
@@ -141,8 +143,8 @@ function Form() {
               Facebook
             </button>
             <button
-              onClick={() => signIn("google")} // Call signIn with provider ID
-              className="flex items-center px-5 py-2 border border-gray-300 rounded-lg shadow-sm text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
+              onClick={() => signIn("google")}
+              className="flex items-center px-5 py-2 border border-gray-300 rounded-lg shadow-xs text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200"
               // disabled={loading}
             >
               <Image

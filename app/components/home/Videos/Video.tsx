@@ -109,7 +109,7 @@ function Video({ VData, isMuted, onToggleMute }: VideoProps) {
       ref={containerRef}
     >
       <div className="w-fit relative lg:px-20">
-        <div className=" h-full relative rounded-xl object-cover aspect-[9/16]">
+        <div className=" h-full relative rounded-xl object-cover aspect-9/16">
           <video
             onClick={handlePlayPause}
             className=""
@@ -162,7 +162,7 @@ function Video({ VData, isMuted, onToggleMute }: VideoProps) {
             )}
           </button>
           {/* Video Title, Description, and Uploader Info */}
-          <div className="absolute bottom-1 text-white z-10 p-2 bg-gradient-to-t from-black/50 to-transparent rounded-b-xl">
+          <div className="absolute bottom-1 text-white z-10 p-2 bg-linear-to-t from-black/50 to-transparent rounded-b-xl">
             {/* Uploader Information and Follow Button */}
             {/* {isUserPopulated(VData.userId) && ( */}
             <div className="flex items-center gap-2">

@@ -145,7 +145,7 @@ function VideosBox() {
 
       {/* Error message display: shown when an error occurs */}
       {error && (
-        <div className="w-full text-center text-red-500 mt-4 p-4 border border-red-300 bg-red-50 rounded-md shadow-sm">
+        <div className="w-full text-center text-red-500 mt-4 p-4 border border-red-300 bg-red-50 rounded-md shadow-xs">
           <p className="font-medium mb-2">{error}</p>
           <button
             onClick={() => {
@@ -156,7 +156,7 @@ function VideosBox() {
               setVideos([]); // Clear existing videos to show fresh data on retry
               fetchVideos(); // Trigger a new fetch
             }}
-            className="mt-3 px-5 py-2 bg-red-600 text-white font-semibold rounded-full shadow-md hover:bg-red-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            className="mt-3 px-5 py-2 bg-red-600 text-white font-semibold rounded-full shadow-md hover:bg-red-700 transition-colors duration-300 focus:outline-hidden focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
           >
             Retry Loading
           </button>

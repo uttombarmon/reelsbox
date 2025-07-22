@@ -24,9 +24,9 @@ const ProfileHeader = ({ uid }: { uid: string }) => {
   }, [uid]);
 
   return (
-    <div className="bg-gray-400 rounded-xl shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
-      <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-blue-400 flex-shrink-0">
-        <div className=" text-black text-4xl w-full h-full flex justify-center items-center">
+    <div className=" shadow-lg p-6 mb-8 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6">
+      <div className="relative w-28 h-28 rounded-full overflow-hidden border-4 border-blue-400 shrink-0">
+        <div className=" text-black dark:text-white text-4xl w-full h-full flex justify-center items-center">
           {user?.image ? (
             <Image
               src={user.image}
@@ -45,7 +45,7 @@ const ProfileHeader = ({ uid }: { uid: string }) => {
           {/* <p>{user?.name?.toString().slice(0, 1)}</p> */}
         </div>
       </div>
-      <div className="text-center md:text-left flex-grow">
+      <div className="text-center md:text-left grow">
         <h1 className="text-3xl font-bold text-gray-900">
           {user?.name || "Reels Box User"}
         </h1>

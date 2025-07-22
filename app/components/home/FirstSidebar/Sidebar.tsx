@@ -1,22 +1,33 @@
-"use client";
+import { authOptions } from "@/lib/auth";
+import logo1 from "@/public/logo1.png";
 import {
   CirclePlus,
   Compass,
   Home,
+  LogIn,
   User,
   UserRoundCog,
   Users,
 } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
+import SignOut from "../../shared/buttons/SignOut";
 
-const Sidebar = () => {
-  const { data: session } = useSession();
+const Sidebar = async () => {
+  const session = await getServerSession(authOptions);
   console.log(session);
   return (
-    <ul className="menu bg-base-200 rounded-box w-full  min-h-full text-black dark:text-white text-xl">
-      <li className=" text-4xl font-bold mb-4">
-        <a href="">ReelsBox</a>
+    <ul className="menu w-full  min-h-full text-xl">
+      <li className=" text-4xl font-bold mb-4 w-full h-14">
+        {/* <a href="">ReelsBox</a> */}
+        {/* <Image src={logo} alt="ReelsBox Logo" className=" xl:hidden" fill />   */}
+        <Image
+          src={logo1}
+          alt="ReelsBox Logo"
+          className=" hidden xl:flex"
+          fill
+        />
       </li>
       <li className=" mb-2">
         <label className="input border-none w-fit focus:w-full">
@@ -39,53 +50,59 @@ const Sidebar = () => {
           <input type="search" required placeholder="Search" />
         </label>
       </li>
+      {/* Home  */}
       <li className=" my-2">
         <a href="">
           <Home />
-          Home
+          <span className=" hidden xl:flex">Home</span>
         </a>
       </li>
+      {/* trending  */}
       <li className=" my-2">
-        <a href="">
+        <a href="/trending">
           <Compass />
-          Trending
+          <span className=" hidden xl:flex">Trending</span>
         </a>
       </li>
+      {/* Profile  */}
       <li className=" my-2">
-        <a href="">
+        <a href="/profile">
           <User />
-          Profile
+          <span className=" hidden xl:flex">Profile</span>
         </a>
       </li>
+      {/* following */}
       <li className=" my-2">
-        <a href="">
+        <a href="/following">
           <Users />
-          Following
+          <span className=" hidden xl:flex">Following</span>
         </a>
       </li>
+      {/* Upload  */}
       <li className=" my-2">
         <a href="">
           <CirclePlus />
-          Upload
+          <span className=" hidden xl:flex">Upload</span>
         </a>
       </li>
+      {/* settings  */}
       <li className=" my-2">
-        <a href="">
+        <a href="/settings">
           <UserRoundCog />
-          Settings
+          <span className=" hidden xl:flex">Settings</span>
         </a>
       </li>
+      {/* login and logout button */}
       {!session ? (
         <li className=" my-2">
           <Link className=" btn btn-accent text-xl" href={"/login"}>
-            Log in
+            <LogIn />
+            <span className=" hidden xl:flex">Log In</span>
           </Link>
         </li>
       ) : (
         <li className=" my-2">
-          <button className=" btn btn-info text-xl" onClick={() => signOut()}>
-            Sign Out
-          </button>
+          <SignOut />
         </li>
       )}
     </ul>

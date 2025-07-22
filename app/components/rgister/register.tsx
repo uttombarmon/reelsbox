@@ -36,7 +36,7 @@ function RegisterForm() {
         // Optionally auto-login, or redirect to login page
         setTimeout(() => {
           router.push("/login");
-        }, 2000); // Redirect after 2 seconds
+        }, 2000);
       }
     } catch (err: any) {
       console.error("Registration error:", err);
@@ -91,7 +91,7 @@ function RegisterForm() {
             name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-gray-300"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-xs focus:outline-hidden focus:ring-pink-500 focus:border-pink-500 text-gray-300"
             placeholder="John Doe"
             required
             disabled={loading}
@@ -110,7 +110,7 @@ function RegisterForm() {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-gray-300"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-xs focus:outline-hidden focus:ring-pink-500 focus:border-pink-500 text-gray-300"
             placeholder="your.email@example.com"
             required
             disabled={loading}
@@ -129,7 +129,7 @@ function RegisterForm() {
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500 text-gray-300"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-xs focus:outline-hidden focus:ring-pink-500 focus:border-pink-500 text-gray-300"
             placeholder="••••••••"
             required
             disabled={loading}
@@ -138,7 +138,7 @@ function RegisterForm() {
 
         <button
           type="submit"
-          className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-semibold text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-colors duration-300"
+          className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-semibold text-white bg-pink-600 hover:bg-pink-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition-colors duration-300"
           disabled={loading}
         >
           {loading ? (

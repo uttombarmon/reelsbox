@@ -10,7 +10,7 @@ function Navbar() {
     const { data: session } = useSession();
     console.log(session);
     return (
-        <div className="navbar bg-opacity-20 bg-indigo-100 backdrop-blur-lg shadow-sm fixed">
+        <div className="navbar bg-opacity-20 bg-indigo-100 backdrop-blur-lg shadow-xs fixed">
             <div className="flex-1">
                 <a className="btn text-xl btn-ghost">ReelsBox</a>
             </div>
@@ -28,7 +28,7 @@ function Navbar() {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-sm">
                         <li>
                             <a className="justify-between">
                                 Profile

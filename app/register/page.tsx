@@ -55,8 +55,8 @@ async function RegisterPage() {
         />
       </Head>
 
-      {/* <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gradient-to-br from-purple-600 to-pink-500 p-4"> */}
-      <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-gradient-to-br from-blue-500/10 to-purple-600/10 p-4">
+      {/* <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-linear-to-br from-purple-600 to-pink-500 p-4"> */}
+      <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center bg-linear-to-br from-blue-500/10 to-purple-600/10 p-4">
         {/* Left Section: Image (Responsive) */}
         <div className="relative hidden w-full lg:w-1/2 h-64 lg:h-auto lg:min-h-[500px] lg:flex items-center justify-center p-4">
           <Image
