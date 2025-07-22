@@ -1,5 +1,5 @@
-import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
+import type { Config } from "tailwindcss";
 
 export default {
   content: [
@@ -17,8 +17,7 @@ export default {
   },
   plugins: [daisyui],
   daisyui: {
-    themes:["light", "dark"],
-    darkTheme: "dark"
+    themes: ["light", "dark"],
   },
-  darkMode:"class"
+  darkMode: "class",
 } satisfies Config;
